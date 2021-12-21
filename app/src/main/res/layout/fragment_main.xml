@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainFragment">
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="1dp"
+        android:layout_height="1dp">
+    </WebView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/scheduleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="오늘의 경기"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="13.5dp"
+                android:textColor="@color/textTitle"
+                />
+
+            <LinearLayout
+                android:id="@+id/mLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="6dp">
+
+                <TextView
+                    android:id="@+id/manTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/textTitle"
+                    />
+
+                <TextView
+                    android:id="@+id/matchContentTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/matchTimePlaceTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+
+                <TextView
+                    android:id="@+id/matchCameraTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/wLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/womanTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textTitle"
+                     />
+
+                <TextView
+                    android:id="@+id/matchContentTextView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:id="@+id/matchTimePlaceTextView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                     />
+
+                <TextView
+                    android:id="@+id/matchCameraTextView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal|center_vertical"
+                     />
+
+            </LinearLayout>
+
+            <View style="@style/Divider"
+                android:layout_marginTop="7dp"/>
+
+            <TextView
+                android:id="@+id/newsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="우리팀 소식"
+                android:textColor="@color/textTitle"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="13.5dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginTop="6dp">
+
+                    <ImageView
+                        android:id="@+id/newsImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:contentDescription="NewsMainImage"
+                        app:srcCompat="@drawable/kovomarket" />
+
+                    <TextView
+                        android:id="@+id/newsTitle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="1dp"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal|center_vertical"
+                        tools:text="뉴스제목1"
+                        android:textColor="@color/textTitle"
+                        android:textSize="15sp" />
+
+                    <View style="@style/Divider_text"
+                        android:layout_marginTop="3dp"/>
+
+                    <TextView
+                        android:id="@+id/newsTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        tools:text="뉴스제목2"
+                        android:textSize="15sp" />
+                    <View style="@style/Divider_text"
+                        android:layout_marginTop="3dp"/>
+                    <TextView
+                        android:id="@+id/newsTitle3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        tools:text="뉴스제목3"
+                        android:textSize="15sp" />
+                    <View style="@style/Divider_text"
+                        android:layout_marginTop="3dp"/>
+                    <TextView
+                        android:id="@+id/newsTitle4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        tools:text="뉴스제목4"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            <ImageView
+                android:id="@+id/kovoImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                app:srcCompat="@drawable/kovomarket" />
+
+            <TextView
+                android:id="@+id/instaText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인스타"
+                android:textColor="@color/textTitle"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="-20dp"
+                android:layout_marginLeft="13.5dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="3dp"/>
+
+            <View style="@style/Divider"
+                android:layout_marginTop="0dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/naverTvText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="구단 영상"
+                android:textColor="@color/textTitle"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="-5dp"
+                android:layout_marginLeft="13.5dp"/>
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    app:sliderAnimationDuration="2000"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderAutoCycleEnabled="true"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="8dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="3dp"
+                    app:sliderIndicatorRadius="2dp"
+                    app:sliderIndicatorSelectedColor="@color/main_color"
+                    app:sliderIndicatorUnselectedColor="@color/casual_color"
+                    app:sliderScrollTimeInSec="4"
+                    app:sliderStartAutoCycle="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="-5dp"/>
+        </LinearLayout>
+
+            <View style="@style/Divider"
+                android:layout_marginTop="0dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/cafe_banner"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                app:srcCompat="@drawable/cafe_banner_test"
+                android:layout_marginTop="-2dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

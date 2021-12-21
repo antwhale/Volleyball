@@ -1,0 +1,23 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:layout="@layout/preference_category">
+        //app:title="@string/messages_header"
+
+        <ListPreference
+            app:defaultValue="기본"
+            app:entries="@array/my_favorite_team"
+            app:entryValues="@array/my_favorite_team"
+            app:key="favorite_team"
+            app:title="응원하는 팀"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="notice"
+            app:title="@string/notice_title"
+            app:summary="준비중"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

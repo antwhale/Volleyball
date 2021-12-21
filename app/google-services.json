@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "46009012374",
+    "project_id": "volleyball-d5287",
+    "storage_bucket": "volleyball-d5287.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46009012374:android:0be5d82a283b938e1632b7",
+        "android_client_info": {
+          "package_name": "org.techtown.volleyball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46009012374-nok5tmsttt6pvsfd54h7abd2bv9pdncl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOBuD_PNCgDshrrnn7dTAorYNpgmyo0vE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "46009012374-nok5tmsttt6pvsfd54h7abd2bv9pdncl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

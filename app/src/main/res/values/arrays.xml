@@ -1,0 +1,19 @@
+<resources>
+    <string-array name="my_favorite_team">
+        <item>GS칼텍스</item>
+        <item>기업은행</item>
+        <item>도로공사</item>
+        <item>인삼공사</item>
+        <item>페퍼저축은행</item>
+        <item>현대건설</item>
+        <item>흥국생명</item>
+        <item>KB손해보험</item>
+        <item>OK금융그룹</item>
+        <item>대한항공</item>
+        <item>삼성화재</item>
+        <item>우리카드</item>
+        <item>한국전력</item>
+        <item>현대캐피탈</item>
+        <item>기본</item>
+    </string-array>
+</resources>
