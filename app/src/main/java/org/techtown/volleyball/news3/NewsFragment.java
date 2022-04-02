@@ -1,5 +1,6 @@
 package org.techtown.volleyball.news3;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -28,6 +29,13 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class NewsFragment extends Fragment {
@@ -38,6 +46,9 @@ public class NewsFragment extends Fragment {
     RecyclerView recyclerView;
     RSSNewsAdapter adapter;
     ArrayList<RSSNewsItem> newsItemList;
+
+    //RXJava
+    Disposable backgroundTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,13 +130,90 @@ public class NewsFragment extends Fragment {
             //Network작업은 반드시 별도의 Thread만 할 수 있다.
             //별도의 Thread 객체 생성
 
-            RssFeedTask task= new RssFeedTask();
-            task.execute(url); //doInBackground()메소드가 발동[thread의 start()와 같은 역할]
+            newsItemList = parsingNewsMethod(url);
+
+            //RssFeedTask task= new RssFeedTask();
+            //task.execute(url); //doInBackground()메소드가 발동[thread의 start()와 같은 역할]
         } catch (MalformedURLException e) { e.printStackTrace();}
 
     }
 
-    class RssFeedTask extends AsyncTask<URL, Void, String> {
+    private ArrayList<RSSNewsItem> parsingNewsMethod(URL url){
+        ArrayList<RSSNewsItem> list = new ArrayList<RSSNewsItem>();
+
+        backgroundTask = Observable.fromCallable(()->{
+            try {
+                InputStream is= url.openStream();
+
+                //읽어온 xml를 파싱(분석)해주는 객체 생성
+                XmlPullParserFactory factory= XmlPullParserFactory.newInstance();
+                XmlPullParser xpp= factory.newPullParser();
+
+                //utf-8은 한글도 읽어오기 위한 인코딩 방식
+                xpp.setInput(is, "utf-8");
+                int eventType= xpp.getEventType();
+
+                RSSNewsItem item= null;
+                String tagName= null;
+
+                while (eventType != XmlPullParser.END_DOCUMENT){
+                    switch (eventType){
+                        case XmlPullParser.START_DOCUMENT:
+                            break;
+                        case XmlPullParser.START_TAG:
+                            tagName = xpp.getName();
+
+                            if(tagName.equals("item")){
+                                item = new RSSNewsItem();
+                            }else if(tagName.equals("title")){
+                                xpp.next();
+                                if(item!=null) item.setTitle(xpp.getText());
+                            }else if(tagName.equals("link")){
+                                xpp.next();
+                                if(item!=null) item.setLink(xpp.getText());
+                            }else if(tagName.equals("description")){
+                                xpp.next();
+                                if(item!=null) item.setDescription(xpp.getText());
+                            }
+                            break;
+                        case XmlPullParser.TEXT:
+                            break;
+                        case XmlPullParser.END_TAG:
+                            tagName=xpp.getName();
+                            if(tagName.equals("item")){
+                                //기사 하나 파싱했으니 읽어온 기사 한개를 대량의 데이터에 추가
+                                list.add(item);
+                                //img 주소 따오기
+
+                                String description = item.getDescription();
+                                if(description.indexOf("img") != -1) { //이미지 있다면
+                                    String imgSrc = item.getDescription().split("<img")[1].split("src=\"")[1].split("thum")[0].concat("thum");
+                                    item.setImgUrl(imgSrc);
+                                }
+                                item=null;
+
+                            }
+                            break;
+                    }
+                    eventType= xpp.next();
+                }//while
+
+                //파싱 작업이 완료되었다!!
+                //테스트로 Toastㄹ 보여주기, 단 별도 스레드는
+                //UI작업이 불가! 그래서 runOnUiThread()를 이용했었음.
+                //이 UI작업을 하는 별도의 메소드로
+                //결과를 리턴하는 방식을 사용
+
+            } catch (IOException e) {e.printStackTrace();} catch (XmlPullParserException e) {e.printStackTrace();}
+            return false;
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe((result) -> {
+            adapter.notifyItemInserted(list.size());
+            backgroundTask.dispose();
+        });
+        return list;
+    }
+
+    /*class RssFeedTask extends AsyncTask<URL, Void, String> {
 
         //Thread의 run()메소드와 같은 역할
         @Override
@@ -222,5 +310,5 @@ public class NewsFragment extends Fragment {
             //이 메소드 안에서는 UI변경 작업 가능
             //Toast.makeText(getContext(), s+":"+newsItemList.size(), Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }

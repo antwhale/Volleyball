@@ -5,15 +5,15 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-    viewBinding {enabled = true}
+
 
     defaultConfig {
         applicationId "org.techtown.volleyball"
         minSdkVersion 16
         targetSdkVersion 30
         multiDexEnabled true
-        versionCode 8
-        versionName "1.2.5"
+        versionCode 11
+        versionName "1.2.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,6 +27,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
@@ -50,7 +53,7 @@ dependencies {
     implementation "androidx.fragment:fragment:$fragment_version"
 
     //multidex 사용
-    compile 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:1.0.3'
 
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:26.5.0')
@@ -81,6 +84,10 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.4'
     // Import the BoM for the Firebase platform
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
+
+    //RXJava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.7'
 
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies

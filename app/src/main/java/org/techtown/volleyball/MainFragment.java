@@ -25,6 +25,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -347,8 +348,8 @@ public class MainFragment extends Fragment {
         //리그 url = "https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp"
         //컵대회 url = "https://www.kovo.co.kr/game/kovocup/13110_schedule_list.asp"
         //String parsingUrl = "https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=017&team=&yymm=2021-02&r_round=";
+        binding.progressBar.setVisibility(ProgressBar.VISIBLE);
         parsingModel.makeScheduleParsingRequest(parsingUrl);
-
         parsingModel.parsingScheduleLivedata.observe(getViewLifecycleOwner(), new Observer<List<String[]>>() {
             @Override
             public void onChanged(List<String[]> scheduleItems) {
@@ -361,6 +362,8 @@ public class MainFragment extends Fragment {
                     binding.matchContentTextView.setVisibility(View.GONE);
                     binding.matchTimePlaceTextView.setVisibility(View.GONE);
                     binding.matchCameraTextView.setVisibility(View.GONE);
+                    binding.progressBar.setVisibility(ProgressBar.GONE);
+
                 }else if(scheduleItems.size() == 1){
                     if(scheduleItems.get(0)[3].matches("")){
                         Log.d(TAG, "경기가 없다!");
@@ -370,6 +373,8 @@ public class MainFragment extends Fragment {
                         binding.matchContentTextView.setVisibility(View.GONE);
                         binding.matchTimePlaceTextView.setVisibility(View.GONE);
                         binding.matchCameraTextView.setVisibility(View.GONE);
+                        binding.progressBar.setVisibility(ProgressBar.GONE);
+
                     }else{
                         Log.d(TAG, "경기 1개 뿐");
                         //하루에 경기 1개인 경우
@@ -381,6 +386,8 @@ public class MainFragment extends Fragment {
                         binding.matchTimePlaceTextView.setText(scheduleItems.get(0)[5]+" ");
                         binding.matchTimePlaceTextView.append(scheduleItems.get(0)[6] + "체육관");
                         binding.matchCameraTextView.setText(scheduleItems.get(0)[7]);
+                        binding.progressBar.setVisibility(ProgressBar.GONE);
+
                     }
                 }else{
                     Log.d(TAG, "경기 2개");
@@ -401,6 +408,8 @@ public class MainFragment extends Fragment {
                     binding.matchTimePlaceTextView2.setText(scheduleItems.get(1)[5]+" ");
                     binding.matchTimePlaceTextView2.append(scheduleItems.get(1)[6] + "체육관");
                     binding.matchCameraTextView2.setText(scheduleItems.get(1)[7]);
+                    binding.progressBar.setVisibility(ProgressBar.GONE);
+
                 }
             }
         });
