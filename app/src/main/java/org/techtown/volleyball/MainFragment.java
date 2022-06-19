@@ -42,6 +42,7 @@ import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerItem;
 import org.techtown.volleyball.slideradapter.SliderAdapter;
 import org.techtown.volleyball.slideradapter.SliderItem;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -237,8 +238,6 @@ public class MainFragment extends Fragment {
     public void onPause() {
         super.onPause();
         Log.d(TAG, "onPause start!!");
-
-        //인스타 리사이클러뷰 비워. 안하면 리사이클러뷰 아이템수가 계속 늘어나버림.
     }
 
     @Override
@@ -442,7 +441,7 @@ public class MainFragment extends Fragment {
         return name;
     }
 
-    private void findImage_url(String source) {
+    private void findImage_url(String source) throws IOException {
         Log.d(TAG, "findImage_url() Start!");
         //Log.d(TAG, "findImage_url() 의 source = " + source);
 
@@ -479,7 +478,11 @@ public class MainFragment extends Fragment {
         public void getHtml(String html) {
             //위 자바스크립트가 호출되면 여기로 html이 반환됨
             Log.d(TAG, "getHtml() start!!");
-            findImage_url(html);
+            try{
+                findImage_url(html);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
