@@ -272,7 +272,7 @@ public class MainFragment extends Fragment {
                             keyValue = "GS";
                             break;
                         case "기업은행" :
-                            keyValue = "Hillstate";
+                            keyValue = "IBK";
                             break;
                         case "도로공사" :
                             keyValue = "Hypass";

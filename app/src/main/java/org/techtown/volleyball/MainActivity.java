@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         teamList.add(new TeamInfo("ibkaltos","ibk__altos", "%EA%B8%B0%EC%97%85%EC%9D%80%ED%96%89"));
         teamList.add(new TeamInfo("hipassvolleyclub","hipassvolleyclub", "%EB%8F%84%EB%A1%9C%EA%B3%B5%EC%82%AC"));
         teamList.add(new TeamInfo("kgcvolley","kgcvolley", "%EC%9D%B8%EC%82%BC%EA%B3%B5%EC%82%AC"));
-        teamList.add(new TeamInfo("","", "%ED%8E%98%ED%8D%BC%EC%A0%80%EC%B6%95%EC%9D%80%ED%96%89"));
+        teamList.add(new TeamInfo("aipeppers","", "%ED%8E%98%ED%8D%BC%EC%A0%80%EC%B6%95%EC%9D%80%ED%96%89"));
         teamList.add(new TeamInfo("hdecvolleyball","hdecvolleyball", "%ED%98%84%EB%8C%80%EA%B1%B4%EC%84%A4"));
         teamList.add(new TeamInfo("pinkspiders","hkpinkspiders", "%ED%9D%A5%EA%B5%AD%EC%83%9D%EB%AA%85"));
         //남자배구
