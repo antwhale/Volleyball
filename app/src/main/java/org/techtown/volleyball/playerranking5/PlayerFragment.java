@@ -28,7 +28,7 @@ public class PlayerFragment extends Fragment {
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new PlayerFragment.MyWebViewClient());
 
-        webView.loadUrl("https://m.kovo.co.kr/game/v-league/11300_player_ranking.asp?season=017");
+        webView.loadUrl("https://m.kovo.co.kr/game/v-league/11300_player_ranking.asp?season=019&s_part=1&g_part=201&r_round=0");
 
         return rootView;
     }

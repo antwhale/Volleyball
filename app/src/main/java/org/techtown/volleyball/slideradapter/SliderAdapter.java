@@ -82,8 +82,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                     //인텐트만들기
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                     context.startActivity(intent);
-                    /*showNaverPage("https://tv.naver.com" + mSliderItems.get(position).naverUrl);
-                    Log.d("jackson" ,"https://tv.naver.com" + mSliderItems.get(position).naverUrl );*/
+
                 }
             }
         });

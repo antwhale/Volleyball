@@ -3,14 +3,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
-
 
     defaultConfig {
         applicationId "org.techtown.volleyball"
         minSdkVersion 16
-        targetSdkVersion 30
+        targetSdkVersion 31
         multiDexEnabled true
         versionCode 12
         versionName "1.2.7"
@@ -62,6 +61,8 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-config'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-database'
 
     //SliderView
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
@@ -89,10 +90,7 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.7'
 
-    // Declare the dependencies for the Crashlytics and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-crashlytics'
-    implementation 'com.google.firebase:firebase-analytics'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         teamList.add(new TeamInfo("okfinancialgroupvc","okman_volleyballclub", "OK%EA%B8%88%EC%9C%B5%EA%B7%B8%EB%A3%B9"));
         teamList.add(new TeamInfo("kaljumbos","kal_jbos", "%EB%8C%80%ED%95%9C%ED%95%AD%EA%B3%B5"));
         teamList.add(new TeamInfo("bluefangsvc","bluefangsvc", "%EC%82%BC%EC%84%B1%ED%99%94%EC%9E%AC"));
-        teamList.add(new TeamInfo("wooricardwev","wooricardwibee", "%EC%9A%B0%EB%A6%AC%EC%B9%B4%EB%93%9C"));
+        teamList.add(new TeamInfo("wooricardwooriwon","wooricardwibee", "%EC%9A%B0%EB%A6%AC%EC%B9%B4%EB%93%9C"));
         teamList.add(new TeamInfo("kepcovolleyball","vixtorm_vbc", "%ED%95%9C%EA%B5%AD%EC%A0%84%EB%A0%A5"));
         teamList.add(new TeamInfo("skywalkers","skywalkers_vbc", "%ED%98%84%EB%8C%80%EC%BA%90%ED%94%BC%ED%83%88"));
         teamList.add(new TeamInfo("kovo","kovopr_official", "%EB%B0%B0%EA%B5%AC"));

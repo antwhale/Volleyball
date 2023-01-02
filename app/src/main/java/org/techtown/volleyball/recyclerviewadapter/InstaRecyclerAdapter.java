@@ -62,9 +62,7 @@ public class InstaRecyclerAdapter extends RecyclerView.Adapter<InstaRecyclerAdap
         return RecyclerList.size();
     }
 
-
     public class RecyclerViewViewHolder extends RecyclerView.ViewHolder{
-
         //private TextView publishedAt, title, description;
         private ImageView thumbnail;
 
@@ -81,7 +79,7 @@ public class InstaRecyclerAdapter extends RecyclerView.Adapter<InstaRecyclerAdap
                 public void onClick(View v) {
                     int pos = getBindingAdapterPosition() ;
                     if (pos != RecyclerView.NO_POSITION) {
-                        showInstaPage("https://www.instagram.com"+RecyclerList.get(pos).insta_url);
+                        showInstaPage(RecyclerList.get(pos).insta_url);
                     }
                 }
             });

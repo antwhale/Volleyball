@@ -28,10 +28,18 @@ import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -45,7 +53,7 @@ import org.techtown.volleyball.slideradapter.SliderItem;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Map;
 
 //1번 프래그먼트 커스텀 화면
 public class MainFragment extends Fragment {
@@ -68,6 +76,11 @@ public class MainFragment extends Fragment {
     String currentInsta="";
 
     private MutableLiveData<List<InstaRecyclerItem>> instaLivedata = new MutableLiveData<>();
+
+    //firebase - realtime database
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference conditionRef = mRootRef.child("Insta");
+
 
     @Override
     public void onDestroyView() {
@@ -96,9 +109,7 @@ public class MainFragment extends Fragment {
         webView = rootView.findViewById(R.id.webView);
 
         webView.getSettings().setJavaScriptEnabled(true);
-        // 자바스크립트인터페이스 연결
-        // 이걸 통해 자바스크립트 내에서 자바함수에 접근할 수 있음.
-        webView.addJavascriptInterface(new MyJavascriptInterface(), "Android");
+
 
         parseInsta();
         //인스타는 가로리사이클러뷰에
@@ -248,8 +259,88 @@ public class MainFragment extends Fragment {
 
     private void parseInsta() {
         Log.d(TAG, "parseInsta() Start!");
+        conditionRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Map<String, Object> resultMap = (Map<String, Object>) snapshot.getValue();
+                if(resultMap != null) {
+                    Log.d(TAG, "onDataChange: " + resultMap);
 
-        webView.setWebViewClient(new WebViewClient() {
+                    String keyValue = "";
+                    switch(myTeam) {
+                        case "GS칼텍스" :
+                            keyValue = "GS";
+                            break;
+                        case "기업은행" :
+                            keyValue = "Hillstate";
+                            break;
+                        case "도로공사" :
+                            keyValue = "Hypass";
+                            break;
+                        case "인삼공사" :
+                            keyValue = "KGC";
+                            break;
+                        case "페퍼저축은행" :
+                            keyValue = "Pepper";
+                            break;
+                        case "현대건설" :
+                            keyValue = "Hillstate";
+                            break;
+                        case "흥국생명" :
+                            keyValue = "PinkSpiders";
+                            break;
+                        case "KB손해보험" :
+                            keyValue = "KB";
+                            break;
+                        case "OK금융그룹" :
+                            keyValue = "OK";
+                            break;
+                        case "대한항공" :
+                            keyValue = "Jumbos";
+                            break;
+                        case "삼성화재" :
+                            keyValue = "Samsung";
+                            break;
+                        case "우리카드" :
+                            keyValue = "Woori";
+                            break;
+                        case "한국전력" :
+                            keyValue = "Kepco";
+                            break;
+                        case "현대캐피탈" :
+                            keyValue = "SkyWalkers";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    ArrayList<Map<String, String>> instaDataArray = (ArrayList<Map<String, String>>) resultMap.get(keyValue);
+                    for(int i = 0; i < 5; i++) {
+                        try {
+                            if(mRecyclerItems.size() == 5) recyclerAdapter.deleteItems();
+//                            String imgUrl = ((JSONObject) instaDataArray.get(i)).getString("imgUrl");
+                            String imgUrl = instaDataArray.get(i).get("imgUrl");
+                            String link = instaDataArray.get(i).get("link");
+                            mRecyclerItems.add(new InstaRecyclerItem(imgUrl, link));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    instaLivedata.postValue(mRecyclerItems);
+                    Log.d(TAG, "mRecyclerItems count = " + mRecyclerItems.size());
+                } else {
+                    Log.d(TAG, "onDataChange: resultMap is null");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //예전 웹뷰로 크롤링
+        /*webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
@@ -273,8 +364,10 @@ public class MainFragment extends Fragment {
             Log.d(TAG, "webView 열기");
         }
 
-        Log.d(TAG, "currentInsta = " + currentInsta);
+        Log.d(TAG, "currentInsta = " + currentInsta);*/
     }
+
+
 
     private void parseNews(){
         String parsingUrl = "http://thespike.co.kr/news/search.php?q=" + myNewsUrl + "&x=0&y=0";
@@ -436,7 +529,7 @@ public class MainFragment extends Fragment {
     private String whatIsTeam() {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(getContext() /* Activity context */);
-        String name = sharedPreferences.getString("favorite_team", "");
+        String name = sharedPreferences.getString("favorite_team", "현대건설");
 
         return name;
     }
@@ -473,18 +566,19 @@ public class MainFragment extends Fragment {
         }
     }
 
-    class MyJavascriptInterface {
+    /*class MyJavascriptInterface {
         @JavascriptInterface
         public void getHtml(String html) {
             //위 자바스크립트가 호출되면 여기로 html이 반환됨
             Log.d(TAG, "getHtml() start!!");
             try{
+
                 findImage_url(html);
             } catch(Exception e){
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
     private void observeRecyclerView() {
         instaLivedata.observe(getViewLifecycleOwner(), new Observer<List<InstaRecyclerItem>>() {
