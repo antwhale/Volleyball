@@ -311,6 +311,7 @@ public class MainFragment extends Fragment {
                             keyValue = "SkyWalkers";
                             break;
                         default:
+                            keyValue = "KOVO";
                             break;
                     }
 
@@ -529,7 +530,7 @@ public class MainFragment extends Fragment {
     private String whatIsTeam() {
         SharedPreferences sharedPreferences =
                 PreferenceManager.getDefaultSharedPreferences(getContext() /* Activity context */);
-        String name = sharedPreferences.getString("favorite_team", "현대건설");
+        String name = sharedPreferences.getString("favorite_team", "");
 
         return name;
     }
