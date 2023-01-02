@@ -62,14 +62,14 @@ public class MainActivity extends AppCompatActivity {
         //버전체크하자
         versionCheck();
 
-        try {
+        /*try {
             //ssl파싱하기위해서
-            setSSL();
+            //setSSL();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (KeyManagementException e) {
             e.printStackTrace();
-        }
+        }*/
 
         //액션바 설정
         getSupportActionBar().setDisplayShowTitleEnabled(false); // 기본 타이틀 사용 안함
