@@ -1,21 +1,32 @@
 package org.techtown.volleyball.playerranking5;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.http.SslError;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import org.techtown.volleyball.R;
 
 public class PlayerFragment extends Fragment {
+    public static final String TAG = PlayerFragment.class.getSimpleName();
     WebView webView;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -23,6 +34,7 @@ public class PlayerFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.web_screen, container, false);
 
         webView = rootView.findViewById(R.id.webView);
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -48,6 +60,46 @@ public class PlayerFragment extends Fragment {
             startActivity(intent);
             return true;
              */
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            super.onReceivedSslError(view, handler, error);
+
+            Log.d(TAG, "onReceivedSslError");
+            handler.proceed();
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            progressBar.setVisibility(View.VISIBLE);
+            Log.d(TAG, "onPageStarted, url: " + url);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+
+            super.onPageFinished(view, url);
+            progressBar.setVisibility(View.GONE);
+
+            Log.d(TAG, "onPageFinished, url: " + url);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            super.onLoadResource(view, url);
+        }
+
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+        }
+
+        @Nullable
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            return super.shouldInterceptRequest(view, request);
         }
     }
 

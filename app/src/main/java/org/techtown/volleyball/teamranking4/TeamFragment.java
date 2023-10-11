@@ -19,19 +19,21 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import org.techtown.volleyball.R;
 
 public class TeamFragment extends Fragment {
     public static final String TAG = TeamFragment.class.getSimpleName();
     WebView webView;
-
+    ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.web_screen, container, false);
 
         webView = rootView.findViewById(R.id.webView);
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
@@ -73,11 +75,17 @@ public class TeamFragment extends Fragment {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            progressBar.setVisibility(View.VISIBLE);
+            Log.d(TAG, "onPageStarted, url: " + url);
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
+
             super.onPageFinished(view, url);
+            progressBar.setVisibility(View.GONE);
+
+            Log.d(TAG, "onPageFinished, url: " + url);
         }
 
         @Override
