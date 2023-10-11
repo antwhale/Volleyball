@@ -8,6 +8,7 @@
     android:layout_marginTop="4dp"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp">
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,6 +40,7 @@
                 android:padding="4dp"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 tools:text="제목입니다." />
 
             <ImageView
