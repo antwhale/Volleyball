@@ -51,6 +51,25 @@
                     android:gravity="center_horizontal|center_vertical"
                     android:layout_marginTop="5dp"
                     android:textColor="@color/textTitle"
+                    tools:text="남자부"
+                    />
+
+                <TextView
+                    android:id="@+id/matchTimePlaceTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    tools:text="체육관"
+                    />
+
+                <TextView
+                    android:id="@+id/matchRoundTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:gravity="center_horizontal|center_vertical"
+                    tools:text="테스트"
                     />
 
                 <TextView
@@ -61,22 +80,7 @@
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical|center_horizontal"
                     android:gravity="center_horizontal|center_vertical"
-                    />
-
-                <TextView
-                    android:id="@+id/matchTimePlaceTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal|center_vertical"
-                    />
-
-                <TextView
-                    android:id="@+id/matchCameraTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
-                    android:gravity="center_horizontal|center_vertical"
+                    tools:text="방송사"
                     />
 
             </LinearLayout>
@@ -86,6 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 />
+
             <LinearLayout
                 android:id="@+id/wLayout"
                 android:layout_width="match_parent"
@@ -106,25 +111,26 @@
                      />
 
                 <TextView
-                    android:id="@+id/matchContentTextView2"
+                    android:id="@+id/matchTimePlaceTextView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal|center_vertical"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
+
                     />
 
                 <TextView
-                    android:id="@+id/matchTimePlaceTextView2"
+                    android:id="@+id/matchRoundTextView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal|center_vertical"
                      />
 
                 <TextView
-                    android:id="@+id/matchCameraTextView2"
+                    android:id="@+id/matchContentTextView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
                     android:gravity="center_horizontal|center_vertical"
                      />
 

@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         teamList.add(new TeamInfo("gsvolleyball","gscaltexkixx", "gs%EC%B9%BC%ED%85%8D%EC%8A%A4"));
         teamList.add(new TeamInfo("ibkaltos","ibk__altos", "%EA%B8%B0%EC%97%85%EC%9D%80%ED%96%89"));
         teamList.add(new TeamInfo("hipassvolleyclub","hipassvolleyclub", "%EB%8F%84%EB%A1%9C%EA%B3%B5%EC%82%AC"));
-        teamList.add(new TeamInfo("kgcvolley","kgcvolley", "%EC%9D%B8%EC%82%BC%EA%B3%B5%EC%82%AC"));
+        teamList.add(new TeamInfo("kgcvolley","red_sparks", "%EC%9D%B8%EC%82%BC%EA%B3%B5%EC%82%AC"));
         teamList.add(new TeamInfo("aipeppers","", "%ED%8E%98%ED%8D%BC%EC%A0%80%EC%B6%95%EC%9D%80%ED%96%89"));
         teamList.add(new TeamInfo("hdecvolleyball","hdecvolleyball", "%ED%98%84%EB%8C%80%EA%B1%B4%EC%84%A4"));
         teamList.add(new TeamInfo("pinkspiders","hkpinkspiders", "%ED%9D%A5%EA%B5%AD%EC%83%9D%EB%AA%85"));
@@ -196,18 +196,18 @@ public class MainActivity extends AppCompatActivity {
                         installed_version = BuildConfig.VERSION_NAME;
                         Log.d("Boo", "installed_version" + installed_version);
 
-                        if(mFirebaseRemoteConfig.getString("android_version").length()>0){
+                        if(mFirebaseRemoteConfig.getString("android_version").length()>0) {
                             firebase_version = mFirebaseRemoteConfig.getString("android_version");
                             Log.d("Boo", "firebase_version" + firebase_version);
                         }
 
                         //버전비교하기
-                        if(installed_version.equals(firebase_version)){
+                        if(installed_version.equals(firebase_version)) {
                             versionPass = true;
                             Log.d(TAG, "Config params updated: " + versionPass);
                             //Toast.makeText(MainActivity.this, "Fetch and activate succeeded",
                             //        Toast.LENGTH_SHORT).show();
-                        } else{
+                        } else {
                             versionPass = false;
                             displayWelcomeMessage();
                         }

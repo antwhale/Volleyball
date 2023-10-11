@@ -36,7 +36,7 @@ public class NewsRepository {
                     Result<List<NewsItem>> resultResponse = makeSynchronousParsingRequest(parseUrl);
                     notifyResult(resultResponse, callback);
                     //callback.onComplete(resultResponse);
-                }catch(Exception e){
+                } catch(Exception e) {
                     Log.d(TAG, parseUrl);
                     Result<List<NewsItem>> errorResult = new Result.Error<>(e);
                     notifyResult(errorResult, callback);

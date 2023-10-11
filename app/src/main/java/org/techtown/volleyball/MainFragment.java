@@ -51,8 +51,11 @@ import org.techtown.volleyball.slideradapter.SliderAdapter;
 import org.techtown.volleyball.slideradapter.SliderItem;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 //1번 프래그먼트 커스텀 화면
@@ -442,67 +445,133 @@ public class MainFragment extends Fragment {
         //컵대회 url = "https://www.kovo.co.kr/game/kovocup/13110_schedule_list.asp"
         //String parsingUrl = "https://www.kovo.co.kr/game/v-league/11110_schedule_list.asp?season=017&team=&yymm=2021-02&r_round=";
         binding.progressBar.setVisibility(ProgressBar.VISIBLE);
-        parsingModel.makeScheduleParsingRequest(parsingUrl);
-        parsingModel.parsingScheduleLivedata.observe(getViewLifecycleOwner(), new Observer<List<String[]>>() {
+        parsingModel.makeScheduleParsingRequest();
+//        parsingModel.parsingScheduleLivedata.observe(getViewLifecycleOwner(), new Observer<List<String[]>>() {
+//            @Override
+//            public void onChanged(List<String[]> scheduleItems) {
+//                Log.d(TAG, "scheduleItems.size() = " + scheduleItems.size());
+//
+//                //코보 일정페이지 업데이트 차이로 어플 오류생기는거 대비
+//                if(scheduleItems.size() == 0){
+//                    binding.wLayout.setVisibility(View.GONE);
+//                    binding.manTextView.setText("no match");   //경기가 없습니다.
+//                    binding.matchContentTextView.setVisibility(View.GONE);
+//                    binding.matchTimePlaceTextView.setVisibility(View.GONE);
+//                    binding.matchCameraTextView.setVisibility(View.GONE);
+//                    binding.progressBar.setVisibility(ProgressBar.GONE);
+//
+//                }else if(scheduleItems.size() == 1){
+//                    if(scheduleItems.get(0)[3].matches("")){
+//                        Log.d(TAG, "경기가 없다!");
+//                        //경기 없는 날
+//                        binding.wLayout.setVisibility(View.GONE);
+//                        binding.manTextView.setText(scheduleItems.get(0)[2]);   //경기가 없습니다.
+//                        binding.matchContentTextView.setVisibility(View.GONE);
+//                        binding.matchTimePlaceTextView.setVisibility(View.GONE);
+//                        binding.matchCameraTextView.setVisibility(View.GONE);
+//                        binding.progressBar.setVisibility(ProgressBar.GONE);
+//
+//                    }else{
+//                        Log.d(TAG, "경기 1개 뿐");
+//                        //하루에 경기 1개인 경우
+//                        binding.wLayout.setVisibility(View.GONE);
+//                        binding.manTextView.setText(scheduleItems.get(0)[2]);
+//                        binding.manTextView.append(" "+scheduleItems.get(0)[8]);//남자부   V리그 6Round
+//                        binding.matchContentTextView.setText(scheduleItems.get(0)[3] + " ");
+//                        binding.matchContentTextView.append(scheduleItems.get(0)[4]);
+//                        binding.matchTimePlaceTextView.setText(scheduleItems.get(0)[5]+" ");
+//                        binding.matchTimePlaceTextView.append(scheduleItems.get(0)[6] + "체육관");
+//                        binding.matchCameraTextView.setText(scheduleItems.get(0)[7]);
+//                        binding.progressBar.setVisibility(ProgressBar.GONE);
+//
+//                    }
+//                }else{
+//                    Log.d(TAG, "경기 2개");
+//
+//                    //하루에 경기 2개인 경우 => secondGame[0] = ""  or scheduleItems.size() == 0일 때;;;
+//                    binding.manTextView.setText(scheduleItems.get(0)[2]);
+//                    binding.manTextView.append(" "+scheduleItems.get(0)[8]);    //남자부   V리그 6Round
+//                    binding.matchContentTextView.setText(scheduleItems.get(0)[3] + " ");  //현대캐피탈 3
+//                    binding.matchContentTextView.append(scheduleItems.get(0)[4]);   // : 2 한국전력
+//                    binding.matchTimePlaceTextView.setText(scheduleItems.get(0)[5]+" ");    // 14:00
+//                    binding.matchTimePlaceTextView.append(scheduleItems.get(0)[6] + "체육관");        //   천안유관순체육관
+//                    binding.matchCameraTextView.setText(scheduleItems.get(0)[7]);       //   KBSNSports
+//
+//                    binding.womanTextView.setText(scheduleItems.get(1)[2]);
+//                    binding.womanTextView.append(" "+scheduleItems.get(1)[8]);
+//                    binding.matchContentTextView2.setText(scheduleItems.get(1)[3] + " ");
+//                    binding.matchContentTextView2.append(scheduleItems.get(1)[4]);
+//                    binding.matchTimePlaceTextView2.setText(scheduleItems.get(1)[5]+" ");
+//                    binding.matchTimePlaceTextView2.append(scheduleItems.get(1)[6] + "체육관");
+//                    binding.matchCameraTextView2.setText(scheduleItems.get(1)[7]);
+//                    binding.progressBar.setVisibility(ProgressBar.GONE);
+//
+//                }
+//            }
+//        });
+
+        parsingModel.manScheduleLiveData.observe(getViewLifecycleOwner(), new Observer<String[]>() {
             @Override
-            public void onChanged(List<String[]> scheduleItems) {
-                Log.d(TAG, "scheduleItems.size() = " + scheduleItems.size());
+            public void onChanged(String[] strings) {
+                binding.progressBar.setVisibility(ProgressBar.GONE);
 
-                //코보 일정페이지 업데이트 차이로 어플 오류생기는거 대비
-                if(scheduleItems.size() == 0){
-                    binding.wLayout.setVisibility(View.GONE);
-                    binding.manTextView.setText("no match");   //경기가 없습니다.
-                    binding.matchContentTextView.setVisibility(View.GONE);
+                if(strings != null) {
+                        String homeTeam = strings[0];
+                        String awayTeam = strings[1];
+                        String place = strings[2];
+                        String round = strings[3];
+                        String time = strings[4];
+
+                        Date nowDate = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 (E)", Locale.getDefault());
+                        String todayString = sdf.format(nowDate);
+                        binding.manTextView.setText(todayString + " " + time);
+
+                        binding.matchTimePlaceTextView.setText(place);
+                        binding.matchRoundTextView.setText(round + "ound");
+                        binding.matchContentTextView.setText(homeTeam + " vs " + awayTeam);
+
+                        binding.matchTimePlaceTextView.setVisibility(View.VISIBLE);
+                        binding.matchRoundTextView.setVisibility(View.VISIBLE);
+                        binding.matchContentTextView.setVisibility(View.VISIBLE);
+                } else {
+                    binding.manTextView.setText("남자부 경기가 없습니다.");
+
                     binding.matchTimePlaceTextView.setVisibility(View.GONE);
-                    binding.matchCameraTextView.setVisibility(View.GONE);
-                    binding.progressBar.setVisibility(ProgressBar.GONE);
+                    binding.matchRoundTextView.setVisibility(View.GONE);
+                    binding.matchContentTextView.setVisibility(View.GONE);
+                }
+            }
+        });
 
-                }else if(scheduleItems.size() == 1){
-                    if(scheduleItems.get(0)[3].matches("")){
-                        Log.d(TAG, "경기가 없다!");
-                        //경기 없는 날
-                        binding.wLayout.setVisibility(View.GONE);
-                        binding.manTextView.setText(scheduleItems.get(0)[2]);   //경기가 없습니다.
-                        binding.matchContentTextView.setVisibility(View.GONE);
-                        binding.matchTimePlaceTextView.setVisibility(View.GONE);
-                        binding.matchCameraTextView.setVisibility(View.GONE);
-                        binding.progressBar.setVisibility(ProgressBar.GONE);
+        parsingModel.womanScheduleLiveData.observe(getViewLifecycleOwner(), new Observer<String[]>() {
+            @Override
+            public void onChanged(String[] strings) {
+                binding.progressBar.setVisibility(ProgressBar.GONE);
 
-                    }else{
-                        Log.d(TAG, "경기 1개 뿐");
-                        //하루에 경기 1개인 경우
-                        binding.wLayout.setVisibility(View.GONE);
-                        binding.manTextView.setText(scheduleItems.get(0)[2]);
-                        binding.manTextView.append(" "+scheduleItems.get(0)[8]);//남자부   V리그 6Round
-                        binding.matchContentTextView.setText(scheduleItems.get(0)[3] + " ");
-                        binding.matchContentTextView.append(scheduleItems.get(0)[4]);
-                        binding.matchTimePlaceTextView.setText(scheduleItems.get(0)[5]+" ");
-                        binding.matchTimePlaceTextView.append(scheduleItems.get(0)[6] + "체육관");
-                        binding.matchCameraTextView.setText(scheduleItems.get(0)[7]);
-                        binding.progressBar.setVisibility(ProgressBar.GONE);
+                if(strings != null) {
+                    String homeTeam = strings[0];
+                    String awayTeam = strings[1];
+                    String place = strings[2];
+                    String round = strings[3];
+                    String time = strings[4];
 
-                    }
-                }else{
-                    Log.d(TAG, "경기 2개");
+                    Date nowDate = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 (E)", Locale.getDefault());
+                    String todayString = sdf.format(nowDate);
+                    binding.womanTextView.setText(todayString + " " + time);
 
-                    //하루에 경기 2개인 경우 => secondGame[0] = ""  or scheduleItems.size() == 0일 때;;;
-                    binding.manTextView.setText(scheduleItems.get(0)[2]);
-                    binding.manTextView.append(" "+scheduleItems.get(0)[8]);    //남자부   V리그 6Round
-                    binding.matchContentTextView.setText(scheduleItems.get(0)[3] + " ");  //현대캐피탈 3
-                    binding.matchContentTextView.append(scheduleItems.get(0)[4]);   // : 2 한국전력
-                    binding.matchTimePlaceTextView.setText(scheduleItems.get(0)[5]+" ");    // 14:00
-                    binding.matchTimePlaceTextView.append(scheduleItems.get(0)[6] + "체육관");        //   천안유관순체육관
-                    binding.matchCameraTextView.setText(scheduleItems.get(0)[7]);       //   KBSNSports
-
-                    binding.womanTextView.setText(scheduleItems.get(1)[2]);
-                    binding.womanTextView.append(" "+scheduleItems.get(1)[8]);
-                    binding.matchContentTextView2.setText(scheduleItems.get(1)[3] + " ");
-                    binding.matchContentTextView2.append(scheduleItems.get(1)[4]);
-                    binding.matchTimePlaceTextView2.setText(scheduleItems.get(1)[5]+" ");
-                    binding.matchTimePlaceTextView2.append(scheduleItems.get(1)[6] + "체육관");
-                    binding.matchCameraTextView2.setText(scheduleItems.get(1)[7]);
-                    binding.progressBar.setVisibility(ProgressBar.GONE);
-
+                    binding.matchTimePlaceTextView2.setText(place);
+                    binding.matchRoundTextView2.setText(round + "ound");
+                    binding.matchContentTextView2.setText(homeTeam + " vs " + awayTeam);
+                    binding.matchTimePlaceTextView2.setVisibility(View.VISIBLE);
+                    binding.matchRoundTextView2.setVisibility(View.VISIBLE);
+                    binding.matchContentTextView2.setVisibility(View.VISIBLE);
+                } else {
+                    binding.womanTextView.setText("여자부 경기가 없습니다.");
+                    binding.matchTimePlaceTextView2.setVisibility(View.GONE);
+                    binding.matchRoundTextView2.setVisibility(View.GONE);
+                    binding.matchContentTextView2.setVisibility(View.GONE);
                 }
             }
         });

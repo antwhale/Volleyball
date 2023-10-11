@@ -21,6 +21,9 @@ public class ParsingModel extends AndroidViewModel {
     MutableLiveData<List<NewsItem>> parsingNewsLivedata = new MutableLiveData<>();
     MutableLiveData<List<String[]>> parsingScheduleLivedata = new MutableLiveData<>();
 
+    MutableLiveData<String[]> manScheduleLiveData = new MutableLiveData<>();
+    MutableLiveData<String[]> womanScheduleLiveData = new MutableLiveData<>();
+
     public ParsingModel(@NonNull Application application) {
         super(application);
         naverTvRepository = new NaverTvRepository (
@@ -36,13 +39,10 @@ public class ParsingModel extends AndroidViewModel {
         scheduleRepository = new ScheduleRepository(
                 ((MyApplication)application).executorService,
                 ((MyApplication)application).mainThreadHandler
-                );
+        );
     }
 
-
-
-
-    public void makeParsingRequest(String parsingUrl){
+    public void makeParsingRequest(String parsingUrl) {
         Log.d(TAG, "첫번째 " + parsingUrl);
         naverTvRepository.makeParsingRequest(parsingUrl, new RepositoryCallback<List<SliderItem>>() {
             @Override
@@ -65,7 +65,7 @@ public class ParsingModel extends AndroidViewModel {
         });
     }
 
-    public void makeNewsParsingRequest(String parsingUrl){
+    public void makeNewsParsingRequest(String parsingUrl) {
         Log.d(TAG, "첫번째 뉴스 " + parsingUrl);
         newsRepository.makeParsingRequest(parsingUrl, new RepositoryCallback<List<NewsItem>>() {
             @Override
@@ -87,25 +87,33 @@ public class ParsingModel extends AndroidViewModel {
         });
     }
 
-    public void makeScheduleParsingRequest(String parsingUrl){
-        Log.d(TAG, "코보 스케줄 url = " + parsingUrl);
-        scheduleRepository.makeParsingRequest(parsingUrl, new RepositoryCallback<List<String[]>>(){
+    public void makeScheduleParsingRequest() {
+        //남자 스케줄 파싱
+        scheduleRepository.makeParsingRequest(1, new RepositoryCallback<String[]>(){
             @Override
-            public void onComplete(Result<List<String[]>> result) {
-                if(result instanceof Result.Success){
-                    Log.d(TAG, parsingUrl);
+            public void onComplete(Result<String[]> result) {
+                if(result instanceof Result.Success) {
+                    manScheduleLiveData.postValue(((Result.Success<String[]>) result).data);
+                    Log.d(TAG, "Manschedule 성공이다");
+                } else {
+                    Log.d(TAG, String.valueOf(((Result.Error<String[]>) result).exception));
+                    Log.d(TAG, "Manschedule 실패이다");
+                }
+            }
+        });
 
-                    parsingScheduleLivedata.postValue(((Result.Success<List<String[]>>)result).data);
-
-                    //Log.d(TAG, ((Result.Success<List<String>>) result).data);
-                    Log.d(TAG, "schedule 성공이다");
-                }else{
-                    Log.d(TAG, parsingUrl);
-                    Log.d(TAG, String.valueOf(((Result.Error<List<String[]>>) result).exception));
-                    Log.d(TAG, "schedule 실패이다");
+        //여자 스케줄 파싱
+        scheduleRepository.makeParsingRequest(0, new RepositoryCallback<String[]>() {
+            @Override
+            public void onComplete(Result<String[]> result) {
+                if(result instanceof Result.Success) {
+                    womanScheduleLiveData.postValue(((Result.Success<String[]>) result).data);
+                    Log.d(TAG, "Womanschedule 성공이다");
+                } else {
+                    Log.d(TAG, String.valueOf(((Result.Error<String[]>) result).exception));
+                    Log.d(TAG, "Womanschedule 실패이다");
                 }
             }
         });
     }
-
 }
