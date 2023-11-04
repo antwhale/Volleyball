@@ -523,7 +523,7 @@ public class MainFragment extends Fragment {
                         String time = strings[4];
 
                         Date nowDate = new Date();
-                        SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 (E)", Locale.getDefault());
+                        SimpleDateFormat sdf = new SimpleDateFormat("M월 d일 (E)", Locale.KOREA);
                         String todayString = sdf.format(nowDate);
                         binding.manTextView.setText(todayString + " " + time);
 
@@ -557,7 +557,7 @@ public class MainFragment extends Fragment {
                     String time = strings[4];
 
                     Date nowDate = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 (E)", Locale.getDefault());
+                    SimpleDateFormat sdf = new SimpleDateFormat("M월 d일 (E)", Locale.KOREA);
                     String todayString = sdf.format(nowDate);
                     binding.womanTextView.setText(todayString + " " + time);
 

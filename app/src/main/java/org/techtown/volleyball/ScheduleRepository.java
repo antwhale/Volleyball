@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
@@ -55,8 +56,10 @@ public class ScheduleRepository {
             public void run() {
                 try {
                     Date nowDate = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat("MM월 dd일 (E)");
+                    SimpleDateFormat sdf = new SimpleDateFormat("M월 d일 (E)", Locale.KOREA);
                     String todayString = sdf.format(nowDate);
+
+                    Log.d(TAG, "todayString : " + todayString + "Locale : " + Locale.getDefault().toString());
 
                     String genderKey = "";
                     if(gender == 1) {
