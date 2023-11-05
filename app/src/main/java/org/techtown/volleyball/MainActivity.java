@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
     //버전 바뀌면은 gradle(app) 가서 version code와 version name을 수정한다.
     //그리고 firebase가서 버전 수정한다.
     private void versionCheck() {
-        //파이어베이스 원격객체 구성c
+        //파이어베이스 원격객체 구성
         final FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
                 .setMinimumFetchIntervalInSeconds(3600)

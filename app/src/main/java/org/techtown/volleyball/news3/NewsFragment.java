@@ -186,7 +186,7 @@ public class NewsFragment extends Fragment {
                                 //img 주소 따오기
 
                                 String description = item.getDescription();
-                                if(description.indexOf("img") != -1) { //이미지 있다면
+                                if(description != null && description.indexOf("img") != -1) { //이미지 있다면
                                     String imgSrc = item.getDescription().split("<img")[1].split("src=\"")[1].split("thum")[0].concat("thum");
                                     item.setImgUrl(imgSrc);
                                 }
