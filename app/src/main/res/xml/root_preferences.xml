@@ -3,7 +3,7 @@
 
     <PreferenceCategory
         android:layout="@layout/preference_category">
-        //app:title="@string/messages_header"
+<!--        app:title="@string/messages_header"-->
 
         <ListPreference
             app:defaultValue="기본"
@@ -19,5 +19,17 @@
             app:summary="준비중"/>
 
     </PreferenceCategory>
+
+    <Preference
+        app:key="privacy_rule"
+        app:title="@string/privacy_rule"
+        >
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="https://antwhale94.blogspot.com/2023/11/blog-post.html"
+            />
+
+    </Preference>
 
 </PreferenceScreen>

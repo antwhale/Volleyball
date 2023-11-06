@@ -11,5 +11,6 @@
 
     <!-- Sync Preferences -->
     <string name="notice_title">경기알림</string>
+    <string name="privacy_rule">개인정보처리방침</string>
 
 </resources>
