@@ -78,7 +78,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 //여기서 액티비티 띄우 네이버 영상
                 if(position != RecyclerView.NO_POSITION){
                     //링크가져오기
-                    String link = "https://tv.naver.com" + mSliderItems.get(position).naverUrl;
+                    String link = mSliderItems.get(position).naverUrl;
                     //인텐트만들기
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
                     context.startActivity(intent);

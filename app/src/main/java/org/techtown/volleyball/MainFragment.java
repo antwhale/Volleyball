@@ -435,7 +435,7 @@ public class MainFragment extends Fragment {
                     sliderAdapter.renewItems(sliderItems);   //슬라이더뷰에 넣어
             }
         });
-        parsingModel.makeParsingRequest("https://tv.naver.com/" + myNaverTvUrl);
+        parsingModel.makeParsingRequest(myNaverTvUrl);
     }
 
     private void parseSchedule() {

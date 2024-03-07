@@ -36,7 +36,7 @@ public class NaverTvRepository {
                     Result<List<SliderItem>> resultResponse = makeSynchronousParsingRequest(parseUrl);
                     notifyResult(resultResponse, callback);
                     //callback.onComplete(resultResponse);
-                }catch(Exception e){
+                } catch(Exception e) {
                     Log.d(TAG, parseUrl);
                     Result<List<SliderItem>> errorResult = new Result.Error<>(e);
                     notifyResult(errorResult, callback);
@@ -57,12 +57,12 @@ public class NaverTvRepository {
             Document doc = Jsoup.connect(parseUrl).get();
             //Log.d(TAG, doc.toString());
 
-            Elements links = doc.select("div[class=cds _MM_CARD  ]");
+            Elements links = doc.select("div.video_thumbnail");
             //Log.d(TAG, links.toString());
             int count = 0;
             for (Element link : links) {
                 if(count == 5) break;
-                naverUrl = link.select("div.cds_type a.cds_thm").attr("href");
+                naverUrl = link.select("a.thumb_link").attr("href");
                 imgUrl = link.select("img").attr("src");
                 parsingResponse.add(new SliderItem(imgUrl, naverUrl));
 
