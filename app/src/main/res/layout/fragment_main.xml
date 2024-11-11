@@ -259,29 +259,22 @@
                 android:textColor="@color/textTitle"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="-5dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="13.5dp"/>
 
-                <com.smarteist.autoimageslider.SliderView
+                <io.github.antwhale.AntwhaleImageSlider
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    app:sliderAnimationDuration="2000"
-                    app:sliderAutoCycleDirection="back_and_forth"
-                    app:sliderAutoCycleEnabled="true"
-                    app:sliderIndicatorAnimationDuration="600"
-                    app:sliderIndicatorGravity="center_horizontal|bottom"
-                    app:sliderIndicatorMargin="8dp"
-                    app:sliderIndicatorOrientation="horizontal"
-                    app:sliderIndicatorPadding="3dp"
-                    app:sliderIndicatorRadius="2dp"
-                    app:sliderIndicatorSelectedColor="@color/main_color"
-                    app:sliderIndicatorUnselectedColor="@color/casual_color"
-                    app:sliderScrollTimeInSec="4"
-                    app:sliderStartAutoCycle="true"
+                    android:layout_height="200dp"
+                    app:bottomMargin="16dp"
+                    app:indicatorMargin="4dp"
+                    app:activeIndicatorRes="@drawable/blue_indicator_active"
+                    app:inactiveIndicatorRes="@drawable/gray_indicator_inactive"
+                    app:autoScrolling="true"
+                    app:scrollingDelay="5000"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="-5dp"/>
+                    />
         </LinearLayout>
 
             <View style="@style/Divider"

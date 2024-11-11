@@ -16,6 +16,9 @@ buildscript {
 
         // Add the Crashlytics Gradle plugin
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
+
+        //kotlin
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0'
     }
 }
 

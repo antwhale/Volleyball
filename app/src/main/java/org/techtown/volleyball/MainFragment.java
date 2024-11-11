@@ -33,9 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,12 +45,13 @@ import org.jsoup.select.Elements;
 import org.techtown.volleyball.databinding.FragmentMainBinding;
 import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerAdapter;
 import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerItem;
-import org.techtown.volleyball.slideradapter.SliderAdapter;
+import org.techtown.volleyball.slideradapter.NaverTVSliderAdapter;
 import org.techtown.volleyball.slideradapter.SliderItem;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -62,7 +61,7 @@ import java.util.Map;
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
 
-    private SliderAdapter sliderAdapter;
+    private NaverTVSliderAdapter sliderAdapter;
 
     private InstaRecyclerAdapter recyclerAdapter;
     private List<InstaRecyclerItem> mRecyclerItems = new ArrayList<>();
@@ -136,12 +135,12 @@ public class MainFragment extends Fragment {
 
     private void setUpSliderView() {
             Log.d(TAG,"sliderView 세팅!");
-            sliderAdapter = new SliderAdapter(getContext());
-
-            binding.imageSlider.setSliderAdapter(sliderAdapter);
-            binding.imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
-            binding.imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-            binding.imageSlider.startAutoCycle();
+            sliderAdapter = new NaverTVSliderAdapter(Collections.emptyList());
+            binding.imageSlider.setAdapter(sliderAdapter);
+//            binding.imageSlider.setSliderAdapter(sliderAdapter);
+//            binding.imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
+//            binding.imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+//            binding.imageSlider.startAutoCycle();
     }
 
     private void checkMyTeam() {
@@ -432,7 +431,8 @@ public class MainFragment extends Fragment {
         parsingModel.parsingLivedata.observe(getViewLifecycleOwner(), new Observer<List<SliderItem>>() {
             @Override
             public void onChanged(List<SliderItem> sliderItems) {
-                    sliderAdapter.renewItems(sliderItems);   //슬라이더뷰에 넣어
+                sliderAdapter.renewItems(sliderItems);   //슬라이더뷰에 넣어
+                binding.imageSlider.setAdapter(sliderAdapter);
             }
         });
         parsingModel.makeParsingRequest(myNaverTvUrl);

@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                         if(installed_version.equals(firebase_version)) {
                             versionPass = true;
                             Log.d(TAG, "Config params updated: " + versionPass);
-                            //Toast.makeText(MainActivity.this, "Fetch and activate succeeded",
+                            //Toast.makeText(io.github.antwhale.activity.MainActivity.this, "Fetch and activate succeeded",
                             //        Toast.LENGTH_SHORT).show();
                         } else {
                             versionPass = false;

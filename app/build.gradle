@@ -1,15 +1,16 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "org.techtown.volleyball"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 34
         multiDexEnabled true
         versionCode 16
         versionName "1.2.11"
@@ -29,6 +30,10 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 }
 
@@ -64,10 +69,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-database'
 
-    //SliderView
-    implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    //ImageSlider
+    implementation 'io.github.antwhale:AntwhaleImageSlider:1.0.1'
 
-// jsoup HTML parser library @ https://jsoup.org/
+
+    // jsoup HTML parser library @ https://jsoup.org/
     implementation 'org.jsoup:jsoup:1.13.1'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -75,8 +81,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
 
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -90,6 +96,8 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.7'
 
+    //kotlin
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.6.0'
 
 }
 
