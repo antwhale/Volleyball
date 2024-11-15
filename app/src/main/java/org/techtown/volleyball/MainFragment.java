@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
@@ -21,10 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
@@ -35,9 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -60,7 +55,6 @@ import java.util.Map;
 //1번 프래그먼트 커스텀 화면
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
-
     private NaverTVSliderAdapter sliderAdapter;
 
     private InstaRecyclerAdapter recyclerAdapter;
@@ -101,7 +95,8 @@ public class MainFragment extends Fragment {
 
         checkMyTeam();
         //뷰바인딩
-        binding = FragmentMainBinding.inflate(inflater, container, false);
+        binding = FragmentMainBinding.inflate(getLayoutInflater());
+//        binding = FragmentMainBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
         parsingModel = new ViewModelProvider(this,
