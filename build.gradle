@@ -20,6 +20,9 @@ buildscript {
 
         //kotlin
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
+
+        //hilt
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
     }
 }
 

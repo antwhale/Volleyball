@@ -6,10 +6,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import kotlinx.coroutines.Dispatchers
 
 abstract class BaseViewModel(application: Application): AndroidViewModel(application) {
     protected val TAG = this::class.java.simpleName
     val compositeDisposable = CompositeDisposable()
+    val dispatcherIO = Dispatchers.IO
 
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>

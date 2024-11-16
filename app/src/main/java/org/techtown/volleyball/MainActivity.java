@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import org.techtown.volleyball.data.entity.TeamInfo;
 import org.techtown.volleyball.news3.NewsFragment;
 import org.techtown.volleyball.playerranking5.PlayerFragment;
 import org.techtown.volleyball.schedule2.ScheduleFragment;
@@ -241,50 +242,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    class TeamInfo {
-        String team_youtube;
-        String team_insta;
-        String team_news;
-
-        public TeamInfo(String team_youtube, String team_insta, String team_news) {
-            this.team_youtube = team_youtube;
-            this.team_insta = team_insta;
-            this.team_news = team_news;
-        }
-
-        public String getTeam_youtube() {
-            return team_youtube;
-        }
-
-        public void setTeam_youtube(String team_youtube) {
-            this.team_youtube = team_youtube;
-        }
-
-        public String getTeam_insta() {
-            return team_insta;
-        }
-
-        public void setTeam_insta(String team_insta) {
-            this.team_insta = team_insta;
-        }
-
-        public String getTeam_news() {
-            return team_news;
-        }
-
-        public void setTeam_news(String team_news) {
-            this.team_news = team_news;
-        }
-
-        @Override
-        public String toString() {
-            return "TeamInfo{" +
-                    "team_youtube='" + team_youtube + '\'' +
-                    ", team_insta='" + team_insta + '\'' +
-                    ", team_news='" + team_news + '\'' +
-                    '}';
-        }
-    }
 
     public static void setSSL() throws NoSuchAlgorithmException, KeyManagementException {
         TrustManager[] trustAllCerts = new TrustManager[] {

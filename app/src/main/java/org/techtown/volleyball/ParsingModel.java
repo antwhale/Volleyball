@@ -27,18 +27,18 @@ public class ParsingModel extends AndroidViewModel {
     public ParsingModel(@NonNull Application application) {
         super(application);
         naverTvRepository = new NaverTvRepository (
-                ((MyApplication)application).executorService,
-                ((MyApplication)application).mainThreadHandler
+                ((MyApplication)application).getExecutorService(),
+                ((MyApplication)application).getMainThreadHandler()
         );
 
         newsRepository = new NewsRepository(
-                ((MyApplication)application).executorService,
-                ((MyApplication)application).mainThreadHandler
+                ((MyApplication)application).getExecutorService(),
+                ((MyApplication)application).getMainThreadHandler()
         );
 
         scheduleRepository = new ScheduleRepository(
-                ((MyApplication)application).executorService,
-                ((MyApplication)application).mainThreadHandler
+                ((MyApplication)application).getExecutorService(),
+                ((MyApplication)application).getMainThreadHandler()
         );
     }
 

@@ -8,16 +8,12 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +48,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
 //1번 프래그먼트 커스텀 화면
+@AndroidEntryPoint
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
     private NaverTVSliderAdapter sliderAdapter;
@@ -144,79 +143,79 @@ public class MainFragment extends Fragment {
 
         switch (myTeam){
             case "GS칼텍스" :
-                myNaverTvUrl = MainActivity.teamList.get(0).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(0).team_insta;
-                myNewsUrl = MainActivity.teamList.get(0).team_news;
+                myNaverTvUrl = MainActivity.teamList.get(0).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(0).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(0).getNewsUrl();
                 break;
             case "기업은행" :
-                myNaverTvUrl =  MainActivity.teamList.get(1).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(1).team_insta;
-                myNewsUrl = MainActivity.teamList.get(1).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(1).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(1).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(1).getNewsUrl();
                 break;
             case "도로공사" :
-                myNaverTvUrl = MainActivity.teamList.get(2).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(2).team_insta;
-                myNewsUrl = MainActivity.teamList.get(2).team_news;
+                myNaverTvUrl = MainActivity.teamList.get(2).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(2).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(2).getNewsUrl();
                 break;
             case "인삼공사" :
-                myNaverTvUrl = MainActivity.teamList.get(3).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(3).team_insta;
-                myNewsUrl = MainActivity.teamList.get(3).team_news;
+                myNaverTvUrl = MainActivity.teamList.get(3).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(3).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(3).getNewsUrl();
                 break;
             case "페퍼저축은행" :
-                myNaverTvUrl =  MainActivity.teamList.get(4).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(4).team_insta;
-                myNewsUrl = MainActivity.teamList.get(4).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(4).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(4).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(4).getNewsUrl();
                 break;
             case "현대건설" :
-                myNaverTvUrl =  MainActivity.teamList.get(5).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(5).team_insta;
-                myNewsUrl = MainActivity.teamList.get(5).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(5).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(5).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(5).getNewsUrl();
                 break;
             case "흥국생명" :
-                myNaverTvUrl =  MainActivity.teamList.get(6).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(6).team_insta;
-                myNewsUrl = MainActivity.teamList.get(6).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(6).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(6).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(6).getNewsUrl();
                 break;
             case "KB손해보험" :
-                myNaverTvUrl =  MainActivity.teamList.get(7).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(7).team_insta;
-                myNewsUrl = MainActivity.teamList.get(7).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(7).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(7).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(7).getNewsUrl();
                 break;
             case "OK금융그룹" :
-                myNaverTvUrl = MainActivity.teamList.get(8).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(8).team_insta;
-                myNewsUrl = MainActivity.teamList.get(8).team_news;
+                myNaverTvUrl = MainActivity.teamList.get(8).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(8).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(8).getNewsUrl();
                 break;
             case "대한항공" :
-                myNaverTvUrl =  MainActivity.teamList.get(9).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(9).team_insta;
-                myNewsUrl = MainActivity.teamList.get(9).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(9).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(9).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(9).getNewsUrl();
                 break;
             case "삼성화재" :
-                myNaverTvUrl = MainActivity.teamList.get(10).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(10).team_insta;
-                myNewsUrl = MainActivity.teamList.get(10).team_news;
+                myNaverTvUrl = MainActivity.teamList.get(10).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(10).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(10).getNewsUrl();
                 break;
             case "우리카드" :
-                myNaverTvUrl =  MainActivity.teamList.get(11).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(11).team_insta;
-                myNewsUrl = MainActivity.teamList.get(11).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(11).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(11).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(11).getNewsUrl();
                 break;
             case "한국전력" :
-                myNaverTvUrl =  MainActivity.teamList.get(12).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(12).team_insta;
-                myNewsUrl = MainActivity.teamList.get(12).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(12).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(12).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(12).getNewsUrl();
                 break;
             case "현대캐피탈" :
-                myNaverTvUrl =  MainActivity.teamList.get(13).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(13).team_insta;
-                myNewsUrl = MainActivity.teamList.get(13).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(13).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(13).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(13).getNewsUrl();
                 break;
             default:
-                myNaverTvUrl =  MainActivity.teamList.get(14).team_youtube;
-                myInstaUrl = MainActivity.teamList.get(14).team_insta;
-                myNewsUrl = MainActivity.teamList.get(14).team_news;
+                myNaverTvUrl =  MainActivity.teamList.get(14).getNaverTVUrl();
+                myInstaUrl = MainActivity.teamList.get(14).getInstaUrl();
+                myNewsUrl = MainActivity.teamList.get(14).getNewsUrl();
                 break;
         }
 
