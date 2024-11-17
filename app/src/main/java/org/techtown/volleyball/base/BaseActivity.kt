@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.techtown.volleyball.base.DefaultProgress
 
 abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
-
+    val TAG = this::class.simpleName
     protected lateinit var binding: V
 
     val compositeDisposable = CompositeDisposable()
