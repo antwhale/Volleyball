@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         playerFragment = new PlayerFragment();
         newsFragment = new NewsFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mainFragment).commit();
 
         navView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,19 +96,19 @@ public class MainActivity extends AppCompatActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()){
                             case R.id.tab1:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mainFragment).commit();
                                 return true;
                             case R.id.tab2:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, scheduleFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, scheduleFragment).commit();
                                 return true;
                             case R.id.tab3:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, newsFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, newsFragment).commit();
                                 return true;
                             case R.id.tab4:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, teamFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, teamFragment).commit();
                                 return true;
                             case R.id.tab5:
-                                getSupportFragmentManager().beginTransaction().replace(R.id.container, playerFragment).commit();
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, playerFragment).commit();
                                 return true;
                         }
                         return false;
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         if(item != null){
             settingsFragment = new SettingsFragment();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, settingsFragment)
+                    .replace(R.id.fragment_container, settingsFragment)
                     .addToBackStack(null)
 
                     .commit();

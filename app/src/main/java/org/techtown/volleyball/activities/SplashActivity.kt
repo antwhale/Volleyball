@@ -31,7 +31,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     private fun initData() {
         Log.d(TAG, "initData")
 
-//        splashViewModel.initTeamInfo()
     }
     private fun observeLiveData() {
         Log.d(TAG, "observeLiveData")
