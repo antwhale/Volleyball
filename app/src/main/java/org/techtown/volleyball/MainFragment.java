@@ -33,6 +33,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.techtown.volleyball.data.entity.NewsItem;
 import org.techtown.volleyball.databinding.FragmentMainBinding;
 import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerAdapter;
 import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerItem;
@@ -376,39 +377,39 @@ public class MainFragment extends Fragment {
                 if(NewsItems.size() != 0){
                     Glide.with(binding.newsImage.getContext()).load("http://thespike.co.kr/"+NewsItems.get(0).getThumbUrl()).into(binding.newsImage);
                     //뉴스제목 보여주기
-                    binding.newsTitle1.setText(NewsItems.get(0).title);
-                    binding.newsTitle2.setText(NewsItems.get(1).title);
-                    binding.newsTitle3.setText(NewsItems.get(2).title);
-                    binding.newsTitle4.setText(NewsItems.get(3).title);
+                    binding.newsTitle1.setText(NewsItems.get(0).getTitle());
+                    binding.newsTitle2.setText(NewsItems.get(1).getTitle());
+                    binding.newsTitle3.setText(NewsItems.get(2).getTitle());
+                    binding.newsTitle4.setText(NewsItems.get(3).getTitle());
                     //뉴스제목 링크 붙여주기
                     binding.newsImage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(0).newsUrl);
+                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(0).getNewsUrl());
                         }
                     });
                     binding.newsTitle1.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(0).newsUrl);
+                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(0).getNewsUrl());
                         }
                     });
                     binding.newsTitle2.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(1).newsUrl);
+                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(1).getNewsUrl());
                         }
                     });
                     binding.newsTitle3.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(2).newsUrl);
+                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(2).getNewsUrl());
                         }
                     });
                     binding.newsTitle4.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(3).newsUrl);
+                            showLinkPage("http://thespike.co.kr/"+NewsItems.get(3).getNewsUrl());
                         }
                     });
                 }
@@ -503,7 +504,7 @@ public class MainFragment extends Fragment {
 //                }
 //            }
 //        });
-
+//ToDo: schedule data observe
         parsingModel.manScheduleLiveData.observe(getViewLifecycleOwner(), new Observer<String[]>() {
             @Override
             public void onChanged(String[] strings) {

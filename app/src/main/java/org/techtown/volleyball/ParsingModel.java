@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import org.techtown.volleyball.data.entity.NewsItem;
 import org.techtown.volleyball.slideradapter.SliderItem;
 
 import java.util.List;

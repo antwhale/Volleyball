@@ -12,6 +12,9 @@ interface UserInfoDao {
     @Query("SELECT * FROM UserInfo WHERE id = 1")
     suspend fun getUserInfo(): UserInfo?
 
+    @Query("SELECT favoriteTeam FROM UserInfo WHERE id = 1")
+    suspend fun getFavoriteTeamId() : Int?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserInfo(userInfo: UserInfo)
 

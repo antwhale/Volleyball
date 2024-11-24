@@ -13,4 +13,7 @@ interface TeamInfoDao {
 
     @Query("SELECT * FROM TeamInfo")
     suspend fun getAllTeamInfo(): List<TeamInfo>
+
+    @Query("SELECT * FROM TeamInfo WHERE id = :teamId")
+    suspend fun getTeamInfo(teamId: Int) : TeamInfo?
 }

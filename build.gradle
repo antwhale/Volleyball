@@ -19,10 +19,14 @@ buildscript {
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.7.1'
 
         //kotlin
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'
 
         //hilt
-        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
+        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.48'
+
+        //navigation
+//        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.8.0"
+
     }
 }
 
