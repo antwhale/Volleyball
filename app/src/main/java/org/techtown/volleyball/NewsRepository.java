@@ -8,7 +8,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.techtown.volleyball.data.entity.NewsItem;
-import org.techtown.volleyball.slideradapter.SliderItem;
 
 import java.util.ArrayList;
 import java.util.List;

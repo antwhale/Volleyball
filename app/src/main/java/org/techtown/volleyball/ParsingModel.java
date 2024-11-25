@@ -7,8 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import org.techtown.volleyball.data.entity.NaverTVItem;
 import org.techtown.volleyball.data.entity.NewsItem;
-import org.techtown.volleyball.slideradapter.SliderItem;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class ParsingModel extends AndroidViewModel {
     private final NewsRepository newsRepository;
     private final ScheduleRepository scheduleRepository;
 
-    MutableLiveData<List<SliderItem>> parsingLivedata = new MutableLiveData<List<SliderItem>>();
+    MutableLiveData<List<NaverTVItem>> parsingLivedata = new MutableLiveData<List<NaverTVItem>>();
     MutableLiveData<List<NewsItem>> parsingNewsLivedata = new MutableLiveData<>();
 
     MutableLiveData<String[]> manScheduleLiveData = new MutableLiveData<>();
@@ -45,20 +45,20 @@ public class ParsingModel extends AndroidViewModel {
 
     public void makeParsingRequest(String parsingUrl) {
         Log.d(TAG, "첫번째 " + parsingUrl);
-        naverTvRepository.makeParsingRequest(parsingUrl, new RepositoryCallback<List<SliderItem>>() {
+        naverTvRepository.makeParsingRequest(parsingUrl, new RepositoryCallback<List<NaverTVItem>>() {
             @Override
-            public void onComplete(Result<List<SliderItem>> result) {
+            public void onComplete(Result<List<NaverTVItem>> result) {
                 if(result instanceof Result.Success) {
                     Log.d(TAG, parsingUrl);
 
-                    parsingLivedata.postValue(((Result.Success<List<SliderItem>>)result).data);
+                    parsingLivedata.postValue(((Result.Success<List<NaverTVItem>>)result).data);
 
                     //Log.d(TAG, ((Result.Success<List<String>>) result).data);
                     Log.d(TAG, "성공이다");
 
                 } else {
                     Log.d(TAG, parsingUrl);
-                    Log.d(TAG, String.valueOf(((Result.Error<List<SliderItem>>) result).exception));
+                    Log.d(TAG, String.valueOf(((Result.Error<List<NaverTVItem>>) result).exception));
                     Log.d(TAG, "실패이다");
                 }
             }

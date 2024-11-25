@@ -63,38 +63,38 @@ public class RSSNewsAdapter extends RecyclerView.Adapter<RSSNewsAdapter.ViewHold
         }
     }
 
-        @Override
-        public int getItemCount() {
-            return items.size();
-        }
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
 
-        public void addItem(RSSNewsItem item) {
-            items.add(item);
-        }
+    public void addItem(RSSNewsItem item) {
+        items.add(item);
+    }
 
-        public void setItems(ArrayList<RSSNewsItem> items) {
-            this.items = items;
-        }
+    public void setItems(ArrayList<RSSNewsItem> items) {
+        this.items = items;
+    }
 
-        public RSSNewsItem getItem(int position) {
-            return items.get(position);
-        }
+    public RSSNewsItem getItem(int position) {
+        return items.get(position);
+    }
 
-        public void setItem(int position, RSSNewsItem item) {
-            items.set(position, item);
-        }
+    public void setItem(int position, RSSNewsItem item) {
+        items.set(position, item);
+    }
 
-        public void setOnItemClickListener(RecyclerClickListener listener) {
-            this.listener = listener;
-        }
+    public void setOnItemClickListener(RecyclerClickListener listener) {
+        this.listener = listener;
+    }
 
 
-        @Override
-        public void onItemClick(ViewHolder holder, View view, int position) {
-            if (listener != null) {
-                listener.onItemClick(holder, view, position);
-            }
+    @Override
+    public void onItemClick(ViewHolder holder, View view, int position) {
+        if (listener != null) {
+            listener.onItemClick(holder, view, position);
         }
+    }
 
     @Override
     public void onItemClick(InstaRecyclerAdapter.RecyclerViewViewHolder holder, View view, int position) {

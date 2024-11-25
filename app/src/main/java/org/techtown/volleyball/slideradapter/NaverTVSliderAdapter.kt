@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.github.antwhale.AntwhaleImageSliderAdapter
 import org.techtown.volleyball.R
+import org.techtown.volleyball.data.entity.NaverTVItem
 
 class NaverTVSliderAdapter(
-    override var sliderImages: List<SliderItem>
-) : AntwhaleImageSliderAdapter<SliderItem, NaverTVSliderAdapter.NaverTVViewHolder>() {
+    override var sliderImages: List<org.techtown.volleyball.data.entity.NaverTVItem>
+) : AntwhaleImageSliderAdapter<org.techtown.volleyball.data.entity.NaverTVItem, NaverTVSliderAdapter.NaverTVViewHolder>() {
     val TAG = "NaverTVSliderAdapter"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NaverTVViewHolder {
@@ -24,7 +25,7 @@ class NaverTVSliderAdapter(
 
     override fun onBindViewHolder(holder: NaverTVViewHolder, position: Int) {
         Glide.with(holder.itemView)
-            .load(sliderImages[getRealPosition(position)].getThumbUrl())
+            .load(sliderImages[getRealPosition(position)].thumbUrl)
             .into(holder.imageView)
 
         holder.itemView.setOnClickListener { view ->
@@ -42,9 +43,9 @@ class NaverTVSliderAdapter(
 
     override fun getItemListSize(): Int = sliderImages.size
 
-    fun renewItems(sliderItems : List<SliderItem>) {
-        Log.d(TAG, "renewItems, size: " + sliderItems.size)
-        sliderImages = sliderItems
+    fun renewItems(naverTVItems : List<NaverTVItem>) {
+        Log.d(TAG, "renewItems, size: " + naverTVItems.size)
+        sliderImages = naverTVItems
         notifyDataSetChanged()
     }
     inner class NaverTVViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

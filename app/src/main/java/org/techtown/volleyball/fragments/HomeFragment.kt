@@ -8,8 +8,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import org.techtown.volleyball.NewsActivity
@@ -19,8 +21,10 @@ import org.techtown.volleyball.base.utils.UiState
 import org.techtown.volleyball.base.utils.setOneClickListener
 import org.techtown.volleyball.constant.SCHEDULE_DATE_FORMAT
 import org.techtown.volleyball.constant.THE_SPIKE_URL
+import org.techtown.volleyball.data.entity.NaverTVItem
 import org.techtown.volleyball.data.entity.NewsItem
 import org.techtown.volleyball.databinding.FragmentHomeBinding
+import org.techtown.volleyball.slideradapter.NaverTVSliderAdapter
 import org.techtown.volleyball.viewmodels.HomeViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -29,6 +33,8 @@ import java.util.Locale
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     private val homeViewModel: HomeViewModel by viewModels()
+
+    private lateinit var naverTVSliderAdapter : NaverTVSliderAdapter
 
     override val layoutResID: Int
         get() = R.layout.fragment_home
@@ -40,6 +46,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         binding.homeViewModel = homeViewModel
 
+//        initViews()
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.manMatchScheduleUiState
@@ -49,7 +57,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         when(uiState) {
                             is UiState.Success -> {
                                 showProgress(false)
-                                Log.d(TAG, "man's schedule, homeTeam: " + uiState.data[0] + ", awayTeam: " + uiState.data[1] + ", place: " + uiState.data[2] + ", round: " + uiState.data[3] + ", time: " + uiState.data[4])
+                                if(uiState.data.isEmpty()) {
+                                    Log.d(TAG, "man's schedule is empty")
+                                } else {
+                                    Log.d(TAG, "man's schedule, homeTeam: " + uiState.data[0] + ", awayTeam: " + uiState.data[1] + ", place: " + uiState.data[2] + ", round: " + uiState.data[3] + ", time: " + uiState.data[4])
+                                }
                                 showManSchedule(uiState.data)
                             }
                             is UiState.Error -> {
@@ -74,7 +86,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                         when(uiState) {
                             is UiState.Success -> {
                                 showScheduleProgress(false)
-                                Log.d(TAG, "woman's schedule, homeTeam: " + uiState.data[0] + ", awayTeam: " + uiState.data[1] + ", place: " + uiState.data[2] + ", round: " + uiState.data[3] + ", time: " + uiState.data[4])
+                                if(uiState.data.isEmpty()) {
+                                    Log.d(TAG, "woman's schedule is empty")
+                                } else {
+                                    Log.d(TAG, "woman's schedule, homeTeam: " + uiState.data[0] + ", awayTeam: " + uiState.data[1] + ", place: " + uiState.data[2] + ", round: " + uiState.data[3] + ", time: " + uiState.data[4])
+                                }
                                 showWomanSchedule(uiState.data)
                             }
                             is UiState.Error -> {
@@ -95,7 +111,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 homeViewModel.teamNewsUiState
                     .onStart {
                         homeViewModel.fetchFavoriteTeamNews()
-                    }.collect {uiState ->
+                    }.collect { uiState ->
                         when(uiState) {
                             is UiState.Success -> {
                                 Log.d(TAG, "fetchFavoriteTeamNews success")
@@ -111,7 +127,37 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                     }
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.naverTVUiState
+                    .onStart {
+                        homeViewModel.fetchNaverTVVideo()
+                    }.collect { uiState ->
+                        when(uiState) {
+                            is UiState.Success -> {
+                                Log.d(TAG, "fetchNaverTVVideo success")
+                                showNaverTVVideo(uiState.data)
+                            }
+                            is UiState.Error -> {
+                                Log.d(TAG, "error occurred when fetching naverTV video")
+                                showNaverTVVideo(emptyList())
+                            }
+                            is UiState.Loading -> {
+                                Log.d(TAG, "NaverUiState Loading")
+                                showNaverTVVideo(emptyList())
+                            }
+                        }
+                    }
+            }
+        }
     }
+
+//    private fun initViews() {
+//        Log.d(TAG, "initViews")
+//
+//        naverTVSliderAdapter = NaverTVSliderAdapter(emptyList())
+//    }
 
     private fun showManSchedule(scheduleData: List<String>) {
 
@@ -209,8 +255,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private fun showLinkPage(link: String) {
         Log.d(TAG, "showLinkPage, link: $link")
-//        val intent = Intent(context, NewsActivity::class.java)
-//        intent.putExtra("Link", link)
-//        startActivity(intent)
+        val action = HomeFragmentDirections.actionHomeFragmentToTeamNewsFragment(link)
+        findNavController().navigate(action)
+    }
+
+    private fun showNaverTVVideo(naverTVItems: List<NaverTVItem>) {
+        Log.d(TAG, "showNaverTVVideo, video count: " + naverTVItems.size)
+
+        naverTVSliderAdapter = NaverTVSliderAdapter(naverTVItems)
+        binding.imageSlider.setAdapter(naverTVSliderAdapter)
     }
 }

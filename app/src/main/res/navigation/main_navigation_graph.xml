@@ -8,21 +8,30 @@
         android:id="@+id/homeFragment"
         android:name="org.techtown.volleyball.fragments.HomeFragment"
         android:label="HomeFragment" >
+
         <action
             android:id="@+id/action_homeFragment_to_teamNewsFragment"
-            app:destination="@id/teamNewsFragment" />
-    </fragment>
+            app:destination="@id/teamNewsFragment" >
+            <argument
+                android:name="newsUrl"
+                app:argType="string"
+                android:defaultValue=""
+                />
+        </action>
 
+
+    </fragment>
+<!-- -->
     <fragment
         android:id="@+id/teamNewsFragment"
         android:name="org.techtown.volleyball.fragments.TeamNewsFragment"
         android:label="TeamNewsFragment">
-<!--        <argument-->
-<!--            android:name="newsUrlArg"-->
-<!--            app:argType="string"-->
-<!--            android:defaultValue=""-->
-<!--            />-->
 
+        <argument
+            android:name="newsUrl"
+            app:argType="string"
+            android:defaultValue=""
+            />
 
     </fragment>
 

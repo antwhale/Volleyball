@@ -25,6 +25,7 @@ import org.techtown.volleyball.constant.TIME_KEY
 import org.techtown.volleyball.constant.WOMAN_SCHEDULE_FILE_NAME
 import org.techtown.volleyball.data.dao.TeamInfoDao
 import org.techtown.volleyball.data.dao.UserInfoDao
+import org.techtown.volleyball.data.entity.NaverTVItem
 import org.techtown.volleyball.data.entity.NewsItem
 import java.io.File
 import java.text.SimpleDateFormat
@@ -44,6 +45,9 @@ class HomeViewModel @Inject constructor(
 
     //news
     val teamNewsUiState : MutableStateFlow<UiState<List<NewsItem>>> = MutableStateFlow(UiState.Loading)
+
+    //naverTV
+    val naverTVUiState : MutableStateFlow<UiState<List<NaverTVItem>>> = MutableStateFlow(UiState.Loading)
     init {
         Log.d(TAG, "init ")
     }
@@ -148,6 +152,31 @@ class HomeViewModel @Inject constructor(
             }
 
             teamNewsUiState.value = UiState.Success(crawlingResult)
+        }
+    }
+
+    fun fetchNaverTVVideo() {
+        viewModelScope.launch(dispatcherIO) {
+            Log.d(TAG, "fetchNaverTVVideo")
+
+            val favoriteTeamId = userInfoDao.getFavoriteTeamId() ?: 15
+            val favoriteTeamNaverTVUrl = teamInfoDao.getTeamInfo(favoriteTeamId)?.naverTVUrl ?: ""
+
+            val crawlingResult = mutableListOf<NaverTVItem>()
+            val doc = Jsoup.connect(favoriteTeamNaverTVUrl).get()
+            val elements = doc.select("div.video_thumbnail")
+
+            var count = 0
+            for (element in elements) {
+                if(count == 5) break;
+                val naverTVUrl = element.select("a.thumb_link").attr("href")
+                val imgUrl = element.select("img").attr("src")
+                crawlingResult.add(NaverTVItem(imgUrl, naverTVUrl))
+
+                count++
+            }
+
+            naverTVUiState.value = UiState.Success(crawlingResult)
         }
     }
 

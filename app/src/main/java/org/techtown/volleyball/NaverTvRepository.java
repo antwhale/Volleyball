@@ -7,7 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.techtown.volleyball.slideradapter.SliderItem;
+import org.techtown.volleyball.data.entity.NaverTVItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,19 +26,19 @@ public class NaverTvRepository {
 
     public void makeParsingRequest(
             final String parseUrl,
-            final RepositoryCallback<List<SliderItem>> callback
+            final RepositoryCallback<List<NaverTVItem>> callback
     ){
         executor.execute(new Runnable() {
             @Override
             public void run() {
                 try {
                     Log.d(TAG, parseUrl);
-                    Result<List<SliderItem>> resultResponse = makeSynchronousParsingRequest(parseUrl);
+                    Result<List<NaverTVItem>> resultResponse = makeSynchronousParsingRequest(parseUrl);
                     notifyResult(resultResponse, callback);
                     //callback.onComplete(resultResponse);
                 } catch(Exception e) {
                     Log.d(TAG, parseUrl);
-                    Result<List<SliderItem>> errorResult = new Result.Error<>(e);
+                    Result<List<NaverTVItem>> errorResult = new Result.Error<>(e);
                     notifyResult(errorResult, callback);
                     //callback.onComplete(errorResult);
                 }
@@ -46,11 +46,11 @@ public class NaverTvRepository {
         });
     }
 
-    public Result<List<SliderItem>> makeSynchronousParsingRequest(String parseUrl){
+    public Result<List<NaverTVItem>> makeSynchronousParsingRequest(String parseUrl){
         try{
             Log.d(TAG, "parsing start!!");
 
-            List<SliderItem> parsingResponse = new ArrayList<>();
+            List<NaverTVItem> parsingResponse = new ArrayList<>();
             String imgUrl = null;
             String naverUrl = null;
 
@@ -64,22 +64,22 @@ public class NaverTvRepository {
                 if(count == 5) break;
                 naverUrl = link.select("a.thumb_link").attr("href");
                 imgUrl = link.select("img").attr("src");
-                parsingResponse.add(new SliderItem(imgUrl, naverUrl));
+                parsingResponse.add(new NaverTVItem(imgUrl, naverUrl));
 
                 count++;
                 //Log.d(TAG, "parsingResult = "+parsingResult);
             }
 
-            return new Result.Success<List<SliderItem>>(parsingResponse);
+            return new Result.Success<List<NaverTVItem>>(parsingResponse);
 
         }catch(Exception e){
-            return new Result.Error<List<SliderItem>>(e);
+            return new Result.Error<List<NaverTVItem>>(e);
         }
     }
 
     private void notifyResult(
-            final Result<List<SliderItem>> result,
-            final RepositoryCallback<List<SliderItem>> callback
+            final Result<List<NaverTVItem>> result,
+            final RepositoryCallback<List<NaverTVItem>> callback
     ) {
         resultHandler.post(new Runnable() {
             @Override

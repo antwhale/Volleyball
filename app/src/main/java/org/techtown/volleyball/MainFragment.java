@@ -33,12 +33,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.techtown.volleyball.data.entity.NaverTVItem;
 import org.techtown.volleyball.data.entity.NewsItem;
 import org.techtown.volleyball.databinding.FragmentMainBinding;
 import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerAdapter;
 import org.techtown.volleyball.recyclerviewadapter.InstaRecyclerItem;
 import org.techtown.volleyball.slideradapter.NaverTVSliderAdapter;
-import org.techtown.volleyball.slideradapter.SliderItem;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -423,13 +423,14 @@ public class MainFragment extends Fragment {
         setUpSliderView();
         Log.d(TAG, "setUpSliderView Started!");
 
-        parsingModel.parsingLivedata.observe(getViewLifecycleOwner(), new Observer<List<SliderItem>>() {
+        parsingModel.parsingLivedata.observe(getViewLifecycleOwner(), new Observer<List<NaverTVItem>>() {
             @Override
-            public void onChanged(List<SliderItem> sliderItems) {
+            public void onChanged(List<NaverTVItem> sliderItems) {
                 sliderAdapter.renewItems(sliderItems);   //슬라이더뷰에 넣어
                 binding.imageSlider.setAdapter(sliderAdapter);
             }
         });
+        
         parsingModel.makeParsingRequest(myNaverTvUrl);
     }
 

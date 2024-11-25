@@ -18,3 +18,5 @@ const val TIME_KEY = "time"
 
 const val BASE_TEAM_NEWS_URL = "http://thespike.co.kr/news/search.php?q="
 const val THE_SPIKE_URL = "http://thespike.co.kr/"
+
+const val THE_SPIKE_RSS_URL = "http://thespike.co.kr/news/rss.php"
